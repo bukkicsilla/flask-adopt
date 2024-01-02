@@ -17,7 +17,7 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <form method="POST">
-            {{form.hidden_tag()}} {% for field in form if
+            <!--{{form.hidden_tag()}} {% for field in form if
             field.widget.input_type != 'hidden' %}
             <p>
               {{field.label}} {{field(class_="form-control")}} {% for err in
@@ -25,7 +25,8 @@
               <small class="form-text text-danger"> {{err}} </small>
               {% endfor %}
             </p>
-            {% endfor %}
+            {% endfor %}-->
+            {% include "form_fields.html" %}
             <button class="btn btn-info btn-lg">Submit</button>
             <a class="btn btn-warning btn-lg" href="/">Go Back</a>
           </form>
