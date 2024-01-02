@@ -19,6 +19,11 @@
         flex-wrap: wrap;
         border: 2px solid skyblue;
       }
+      .container2 {
+        display: flex;
+        flex-wrap: wrap;
+        border: 2px solid coral;
+      }
       .pet {
         padding: 1rem;
       }
@@ -28,8 +33,9 @@
     {% for msg in get_flashed_messages() %}
     <div class="alert alert-info">{{ msg }}</div>
     {% endfor %}
+
     <div class="container my-5">
-      {% for pet in pets %}
+      {% for pet in pets %} {% if pet.available %}
       <div class="pet">
         {%if pet.photo_url %}
         <img src="{{pet.photo_url}}" class="img-thumbnail" />
@@ -44,9 +50,34 @@
           {% if pet.available %} is available {% endif %}
         </div>
       </div>
-      {% endfor %}
+      {% endif %} {% endfor %}
     </div>
-    <div class="ms-5">
+    <!--<div class="ms-5">
+      <a class="btn btn-success ms-2" href="/add">Add Pet</a>
+      <a class="btn btn-primary ms-2" href="{{ url_for('add_pet') }}"
+        >Add a Pet</a
+      >
+    </div>-->
+
+    <div class="container container2 my-5">
+      {% for pet in pets %} {% if not pet.available %}
+      <div class="pet">
+        {%if pet.photo_url %}
+        <img src="{{pet.photo_url}}" class="img-thumbnail" />
+        {% else %}
+        <img
+          class="img-thumbnail"
+          src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
+        {% endif %}
+        <div>
+          <a href="{{ url_for('edit_pet', pet_id=pet.id) }}">{{ pet.name }}</a>
+          {% if pet.available %} is available {% endif %}
+        </div>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+    <div class="ms-5 my-5">
       <!--<a class="btn btn-success ms-2" href="/add">Add Pet</a>-->
       <a class="btn btn-primary ms-2" href="{{ url_for('add_pet') }}"
         >Add a Pet</a
