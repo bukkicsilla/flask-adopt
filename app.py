@@ -34,7 +34,10 @@ def add_pet():
         #age = form.age.data
         #notes = form.notes.data
         #pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes)
+
+        #getting the data as a dicctionary
         data = {k: v for k, v in form.data.items() if k != "csrf_token"}
+        print("PET", data)
         pet = Pet(**data)
         db.session.add(pet)
         db.session.commit()
