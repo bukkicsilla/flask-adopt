@@ -6,12 +6,15 @@ from forms import AddPetForm, EditPetForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "Animals are adorable."
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 10
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adopt'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adopt'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://klkleurq:bjcINq77AmyQQWxmWjg0P3Y4UNcSbjb9@drona.db.elephantsql.com/klkleurq'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 
 connect_db(app)
-db.create_all()
+#db.create_all()
+with app.app_context():
+  db.create_all()
 
 #app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 #toolbar = DebugToolbarExtension(app)
